@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Tickets
+from .models import Tickets, Empresas
+
+class EmpresasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Empresas
+        fields = ('id', 'empresa', 'sucursal', 'direccion', 'telefono', 'correo',)
 
 class TicketsSerializer(serializers.ModelSerializer):
     class Meta:
