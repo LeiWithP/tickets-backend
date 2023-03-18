@@ -11,46 +11,51 @@ class Empresas(models.Model):
 
 class Tickets(models.Model):
     informacion = models.CharField(max_length=250)
-    fecha_solicitud = models.DateField(
-        default=datetime.today
+    medio_origen = models.CharField(
+        max_length=2,
+        choices=catalogos.MEDIO_ORIGEN,
+        default=4,
     )
     prioridad = models.CharField(
         max_length=2,
         choices=catalogos.PRIORIDAD,
         default=3,
     )
-    estado = models.CharField(
+    fecha_solicitud = models.DateTimeField(
+        default=datetime.today,
+    )
+    actividad = models.CharField(
         max_length=2,
-        choices=catalogos.ESTADO,
-        default=3,
+        choices=catalogos.ACTIVIDAD,
+        default=35,
     )
     uso = models.CharField(
         max_length=2,
         choices=catalogos.USO,
-        default=3,
+        default=2,
     )
     frecuencia = models.CharField(
         max_length=2,
         choices=catalogos.FRECUENCIA,
-        default=3,
+        blank=True,
     )
     duracion = models.CharField(
         max_length=2,
         choices=catalogos.DURACION,
-        default=3,
+        blank=True,
     )
-    medio_origen = models.CharField(
+    estado = models.CharField(
         max_length=2,
-        choices=catalogos.MEDIO_ORIGEN,
-        default=3,
+        choices=catalogos.ESTADO,
+        default=11,
     )
     error = models.CharField(
         max_length=2,
         choices=catalogos.ERROR,
-        default=3,
+        blank=True,
     )
     tipo_error = models.CharField(
         max_length=2,
         choices=catalogos.TIPO_ERROR,
-        default=3,
+        blank=True,
     )
