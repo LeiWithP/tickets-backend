@@ -23,4 +23,4 @@ class TicketsSerializer(serializers.ModelSerializer):
         model = Tickets
         #fields = ('id', 'informacion', 'fecha_solicitud', 'prioridad', 'estado', 'actividad', 'uso', 'frecuencia', 'duracion', 'medio_origen', 'error', 'tipo_error',)
         fields = '__all__'
-        read_only_fields = ('fecha_solicitud',)
+        read_only_fields = ('fecha_solicitud', 'fecha_entrega',)

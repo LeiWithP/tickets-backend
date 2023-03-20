@@ -12,7 +12,12 @@ class Empresas(models.Model):
     correo = models.EmailField()
 
 class Tickets(models.Model):
-    informacion = models.CharField(max_length=250)
+    empresa = models.ForeignKey(
+        Empresas,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    peticion = models.CharField(max_length=250)
     medio_origen = models.CharField(
         max_length=2,
         choices=catalogos.MEDIO_ORIGEN,
@@ -34,6 +39,7 @@ class Tickets(models.Model):
         limit_choices_to=Q(groups__name = 'cliente'),
         null=True,
     )
+    fecha_limite = models.DateField(null=True,)
     prioridad = models.CharField(
         max_length=2,
         choices=catalogos.PRIORIDAD,
@@ -42,6 +48,7 @@ class Tickets(models.Model):
     fecha_solicitud = models.DateTimeField(
         default=datetime.today,
     )
+    servidor_ubicacion = models.CharField(max_length=500, blank=True)
     actividad = models.CharField(
         max_length=2,
         choices=catalogos.ACTIVIDAD,
@@ -67,11 +74,13 @@ class Tickets(models.Model):
         limit_choices_to=Q(groups__name = 'creativo'),
         null=True,
     )
+    #redes sociales...
     frecuencia = models.CharField(
         max_length=2,
         choices=catalogos.FRECUENCIA,
         blank=True,
     )
+    #dias habilitados
     duracion = models.CharField(
         max_length=2,
         choices=catalogos.DURACION,
@@ -82,6 +91,10 @@ class Tickets(models.Model):
         choices=catalogos.ESTADO,
         default=11,
     )
+    fecha_entrega = models.DateTimeField(null=True,)
+    info_cliente = models.CharField(max_length=500, blank=True,)
+    observaciones = models.CharField(max_length=500, blank=True,)
+    correcciones = models.CharField(max_length=500, blank=True,)
     error = models.CharField(
         max_length=2,
         choices=catalogos.ERROR,
