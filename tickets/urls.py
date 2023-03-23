@@ -14,4 +14,5 @@ router.register('api/empresas', api.EmpresasViewSet, 'empresas')
 urlpatterns = [
     path('', include(router.urls)),
     path('api/register/', views.register_api),
+    path('api/login/', views.login_api),
 ]
