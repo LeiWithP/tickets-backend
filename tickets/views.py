@@ -29,3 +29,27 @@ def login_api(request):
             },
         'token': token
     })
+
+@api_view(['GET'])
+def get_user_data(request):
+    user = request.user
+
+    if user.is_authenticated:
+        return Response({
+            'user_info': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            },
+        })
+    
+    return Response({'error': 'No Autenticado'}, status=400)
+
+@api_view(['GET'])
+def user_exists(request):
+    user = request.user
+
+    if user.is_authenticated:
+        return Response({'exist': 'True'})
+    
+    return Response({'error': 'No Autenticado'}, status=400)

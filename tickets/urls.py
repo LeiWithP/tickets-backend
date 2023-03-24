@@ -15,4 +15,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/register/', views.register_api),
     path('api/login/', views.login_api),
+    path('api/user/', views.get_user_data),
+    path('api/exist/', views.user_exists),
 ]
