@@ -2,8 +2,6 @@ from rest_framework import routers
 from django.urls import include, path
 from knox import views as knox_views
 from tickets import api, views
-#from .api import UserViewSet, GroupViewSet
-#from .api import TicketsViewSet, EmpresasViewSet
 
 router = routers.DefaultRouter()
 
