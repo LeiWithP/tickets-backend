@@ -1,5 +1,6 @@
 from rest_framework import routers
 from django.urls import include, path
+from knox import views as knox_views
 from tickets import api, views
 #from .api import UserViewSet, GroupViewSet
 #from .api import TicketsViewSet, EmpresasViewSet
@@ -17,4 +18,6 @@ urlpatterns = [
     path('api/login/', views.login_api),
     path('api/user/', views.get_user_data),
     path('api/exist/', views.user_exists),
+    path('api/logout/', knox_views.LogoutView.as_view()),
+    path('api/logoutall/', knox_views.LogoutAllView.as_view()),
 ]

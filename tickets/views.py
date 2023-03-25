@@ -36,11 +36,10 @@ def get_user_data(request):
 
     if user.is_authenticated:
         return Response({
-            'user_info': {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email
-            },
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'rol': user.groups.all()[0].name
         })
     
     return Response({'error': 'No Autenticado'}, status=400)
