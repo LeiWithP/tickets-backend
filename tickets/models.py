@@ -79,12 +79,14 @@ class Tickets(models.Model):
         max_length=2,
         choices=catalogos.FRECUENCIA,
         blank=True,
+        null=True,
     )
     #dias habilitados
     duracion = models.CharField(
         max_length=2,
         choices=catalogos.DURACION,
         blank=True,
+        null=True,
     )
     estado = models.CharField(
         max_length=2,
@@ -99,9 +101,11 @@ class Tickets(models.Model):
         max_length=2,
         choices=catalogos.ERROR,
         blank=True,
+        null=True,
     )
     tipo_error = models.CharField(
         max_length=2,
         choices=catalogos.TIPO_ERROR,
         blank=True,
+        null=True,
     )
