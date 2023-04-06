@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 from .serializers import RegisterSerializer
+from .catalogos import PRIORIDAD
 
 @api_view(['POST'])
 def register_api(request):
@@ -52,3 +53,7 @@ def user_exists(request):
         return Response({'exist': 'True'})
     
     return Response({'error': 'No Autenticado'}, status=400)
+
+@api_view(['GET'])
+def prioridad_list(request):
+    return Response(PRIORIDAD)

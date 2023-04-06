@@ -18,4 +18,5 @@ urlpatterns = [
     path('api/exist/', views.user_exists),
     path('api/logout/', knox_views.LogoutView.as_view()),
     path('api/logoutall/', knox_views.LogoutAllView.as_view()),
+    path('api/prioridad/', views.prioridad_list),
 ]
