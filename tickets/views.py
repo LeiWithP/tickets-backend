@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 from .serializers import RegisterSerializer
+from django.contrib.auth.models import User
 from .catalogos import PRIORIDAD
 
 @api_view(['POST'])
@@ -39,11 +40,32 @@ def get_user_data(request):
         return Response({
             'id': user.id,
             'username': user.username,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
             'email': user.email,
-            'rol': user.groups.all()[0].name
+            'rol': user.groups.all()[0].name,
+            'last_login': user.last_login
         })
     
     return Response({'error': 'No Autenticado'}, status=400)
+
+@api_view(['GET'])
+def get_all_users(request):
+    users = User.objects.all()
+    user_data = []
+    
+    for user in users:
+        user_data.append({
+            'id': user.id,
+            'username': user.username,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email,
+            'rol': user.groups.all()[0].name,
+            'active': user.is_active,
+            'last_login': user.last_login
+        })
+    return Response(user_data)
 
 @api_view(['GET'])
 def user_exists(request):
