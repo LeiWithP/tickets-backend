@@ -56,7 +56,7 @@ def get_all_users(request):
     
     for user in users:
         user_data.append({
-            'id': user.id,
+            'id': str(user.id),
             'username': user.username,
             'first_name': user.first_name,
             'last_name': user.last_name,
