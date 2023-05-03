@@ -1,10 +1,52 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
-from .catalogos import PRIORIDAD
+from .catalogos import PRIORIDAD, ESTADO, ACTIVIDAD, USO, FRECUENCIA, DURACION, DIA, MEDIO_ORIGEN, ERROR, TIPO_ERROR
+from .catalogos import prioridad_dict, estado_dict, actividad_dict, uso_dict, frecuencia_dict, duracion_dict, dia_dict, medio_origen_dict, error_dict, tipo_error_dict
+
+class PrioridadListView(APIView):
+    def get(self, request):
+        return Response(prioridad_dict)
+    
+class EstadoListView(APIView):
+    def get(self, request):
+        return Response(estado_dict)
+    
+class ActividadListView(APIView):
+    def get(self, request):
+        return Response(actividad_dict)
+
+class UsoListView(APIView):
+    def get(self, request):
+        return Response(uso_dict)
+
+class FrecuenciaListView(APIView):
+    def get(self, request):
+        return Response(frecuencia_dict)
+
+class DuracionListView(APIView):
+    def get(self, request):
+        return Response(duracion_dict)
+
+class DiaListView(APIView):
+    def get(self, request):
+        return Response(dia_dict)
+
+class MedioOrigenListView(APIView):
+    def get(self, request):
+        return Response(medio_origen_dict)
+
+class ErrorListView(APIView):
+    def get(self, request):
+        return Response(error_dict)
+
+class TipoErrorListView(APIView):
+    def get(self, request):
+        return Response(tipo_error_dict)
 
 @api_view(['POST'])
 def register_api(request):
@@ -75,7 +117,3 @@ def user_exists(request):
         return Response({'exist': 'True'})
     
     return Response({'error': 'No Autenticado'}, status=400)
-
-@api_view(['GET'])
-def prioridad_list(request):
-    return Response(PRIORIDAD)

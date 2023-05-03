@@ -41,7 +41,7 @@ class Tickets(models.Model):
     )
     fecha_limite = models.DateField(null=True,)
     prioridad = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=catalogos.PRIORIDAD,
         default=3,
     )
