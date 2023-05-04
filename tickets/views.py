@@ -5,6 +5,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
+from .models import Tickets
 from .catalogos import PRIORIDAD, ESTADO, ACTIVIDAD, USO, FRECUENCIA, DURACION, DIA, MEDIO_ORIGEN, ERROR, TIPO_ERROR
 from .catalogos import prioridad_dict, estado_dict, actividad_dict, uso_dict, frecuencia_dict, duracion_dict, dia_dict, medio_origen_dict, error_dict, tipo_error_dict
 
@@ -117,3 +118,46 @@ def user_exists(request):
         return Response({'exist': 'True'})
     
     return Response({'error': 'No Autenticado'}, status=400)
+
+@api_view(['GET'])
+def get_all_tickets(request):
+    tickets = Tickets.objects.all()
+    ticket_data = []
+    
+    for ticket in tickets:
+        prioridad_str = dict(PRIORIDAD).get(ticket.prioridad, 'No especificado')
+        estado_str = dict(ESTADO).get(ticket.estado, 'No especificado')
+        actividad_str = dict(ACTIVIDAD).get(ticket.actividad, 'No especificado')
+        uso_str = dict(USO).get(ticket.uso, 'No especificado')
+        frecuencia_str = dict(FRECUENCIA).get(ticket.frecuencia, 'No especificado')
+        duracion_str = dict(DURACION).get(ticket.duracion, 'No especificado')
+        medio_origen_str = dict(MEDIO_ORIGEN).get(ticket.medio_origen, 'No especificado')
+        error_str = dict(ERROR).get(ticket.error, 'No especificado')
+        tipo_error_str = dict(TIPO_ERROR).get(ticket.tipo_error, 'No especificado')
+
+        ticket_data.append({
+            'id': str(ticket.id),
+            'peticion': ticket.peticion,
+            'medio_origen': medio_origen_str,
+            'fecha_limite': ticket.fecha_limite,
+            'prioridad': prioridad_str,
+            'fecha_solicitud': ticket.fecha_solicitud,
+            'servidor_ubicacion': ticket.servidor_ubicacion,
+            'actividad': actividad_str,
+            'uso': uso_str,
+            'frecuencia': frecuencia_str,
+            'duracion': duracion_str,
+            'estado': estado_str,
+            'fecha_entrega': ticket.fecha_entrega,
+            'info_cliente': ticket.info_cliente,
+            'observaciones': ticket.observaciones,
+            'correcciones': ticket.correcciones,
+            'error': error_str,
+            'tipo_error': tipo_error_str,
+            #'empresa': ticket.empresa,
+            #'levanta_ticket': ticket.levanta_ticket,
+            #'cliente_solicita': ticket.cliente_solicita,
+            #'encargado': ticket.encargado,
+            #'apoyo': ticket.apoyo,
+        })
+    return Response(ticket_data)

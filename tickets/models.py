@@ -6,10 +6,10 @@ from tickets import catalogos
 
 class Empresas(models.Model):
     empresa = models.CharField(max_length=100)
-    sucursal = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=100)
-    telefono = models.CharField(max_length=10)
-    correo = models.EmailField()
+    # sucursal = models.CharField(max_length=100)
+    # direccion = models.CharField(max_length=100)
+    # telefono = models.CharField(max_length=10)
+    # correo = models.EmailField()
 
 class Tickets(models.Model):
     empresa = models.ForeignKey(
