@@ -5,7 +5,7 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.auth import AuthToken
 from .serializers import RegisterSerializer
 from django.contrib.auth.models import User
-from .models import Tickets
+from .models import Tickets, Empresas
 from .catalogos import PRIORIDAD, ESTADO, ACTIVIDAD, USO, FRECUENCIA, DURACION, DIA, MEDIO_ORIGEN, ERROR, TIPO_ERROR
 from .catalogos import prioridad_dict, estado_dict, actividad_dict, uso_dict, frecuencia_dict, duracion_dict, dia_dict, medio_origen_dict, error_dict, tipo_error_dict
 
@@ -134,6 +134,16 @@ def get_all_tickets(request):
         medio_origen_str = dict(MEDIO_ORIGEN).get(ticket.medio_origen, 'No especificado')
         error_str = dict(ERROR).get(ticket.error, 'No especificado')
         tipo_error_str = dict(TIPO_ERROR).get(ticket.tipo_error, 'No especificado')
+        try: empresa = ticket.empresa.empresa
+        except AttributeError: empresa = None
+        try: levanta_ticket = ticket.levanta_ticket.first_name
+        except AttributeError: levanta_ticket = None
+        try: cliente_solicita = ticket.cliente_solicita.first_name
+        except AttributeError: cliente_solicita = None
+        try: encargado = ticket.encargado.first_name
+        except AttributeError: encargado = None
+        try: apoyo = ticket.apoyo.first_name
+        except AttributeError: apoyo = None
 
         ticket_data.append({
             'id': str(ticket.id),
@@ -154,10 +164,10 @@ def get_all_tickets(request):
             'correcciones': ticket.correcciones,
             'error': error_str,
             'tipo_error': tipo_error_str,
-            #'empresa': ticket.empresa,
-            #'levanta_ticket': ticket.levanta_ticket,
-            #'cliente_solicita': ticket.cliente_solicita,
-            #'encargado': ticket.encargado,
-            #'apoyo': ticket.apoyo,
+            'empresa': empresa,
+            'levanta_ticket': levanta_ticket,
+            'cliente_solicita': cliente_solicita,
+            'encargado': encargado,
+            'apoyo': apoyo,
         })
     return Response(ticket_data)
