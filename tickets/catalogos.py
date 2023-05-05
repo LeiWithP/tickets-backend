@@ -1,6 +1,6 @@
 PRIORIDAD = [
-    ('1', '1-URGENTE'), ('2', '2-Importante'),
-    ('3', '3-Normal'), ('4', '4-Programado'),
+    ('1', 'URGENTE'), ('2', 'Importante'),
+    ('3', 'Normal'), ('4', 'Programado'),
 ]
 
 ESTADO = [
@@ -145,7 +145,6 @@ DIA = [
     ('5', 'Viernes'),
     ('6', 'Sabado'),
     ('7', 'Domingo'),
-
 ]
 
 MEDIO_ORIGEN = [
@@ -179,3 +178,13 @@ TIPO_ERROR = [
     ('6', 'Priorización'),
     ('7', 'Registro de Actividades'),
 ]
+prioridad_dict = {key: value for key, value in PRIORIDAD}
+estado_dict = {key: value for key, value in ESTADO}
+actividad_dict = {key: value for key, value in ACTIVIDAD}
+uso_dict = {key: value for key, value in USO}
+frecuencia_dict = {key: value for key, value in FRECUENCIA}
+duracion_dict = {key: value for key, value in DURACION}
+dia_dict = {key: value for key, value in DIA}
+medio_origen_dict = {key: value for key, value in MEDIO_ORIGEN}
+error_dict = {key: value for key, value in ERROR}
+tipo_error_dict = {key: value for key, value in TIPO_ERROR}
