@@ -140,9 +140,9 @@ def get_all_tickets(request):
         except AttributeError: levanta_ticket = None
         try: cliente_solicita = ticket.cliente_solicita.first_name
         except AttributeError: cliente_solicita = None
-        try: encargado = ticket.encargado.first_name
+        try: encargado = str(ticket.encargado.id)
         except AttributeError: encargado = None
-        try: apoyo = ticket.apoyo.first_name
+        try: apoyo = str(ticket.apoyo.id)
         except AttributeError: apoyo = None
 
         ticket_data.append({
