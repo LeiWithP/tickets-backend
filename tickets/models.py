@@ -120,6 +120,13 @@ class Parrilas(models.Model):
     tema = models.CharField(max_length=100)
     copy = models.CharField(max_length=100)
     frase = models.CharField(max_length=100)
+    nuevo = models.CharField(max_length=100)
+    republicacion = models.CharField(max_length=100)
+    link = models.CharField(max_length=100)
+    tipos_contenido = models.CharField(max_length=100)
+    plataforma = models.CharField(max_length=100)
+    elaborado = models.CharField(max_length=100)
+    ticket = models.CharField(max_length=100)
     
     def __str__(self) -> str:
         return self.parrilla
