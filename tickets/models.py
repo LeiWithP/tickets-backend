@@ -115,6 +115,11 @@ class Tickets(models.Model):
 
 class Parrilas(models.Model):
     parrilla = models.CharField(max_length=100)
+    fecha = models.CharField(max_length=100)
+    objetivo = models.CharField(max_length=100)
+    tema = models.CharField(max_length=100)
+    copy = models.CharField(max_length=100)
+    frase = models.CharField(max_length=100)
     
     def __str__(self) -> str:
         return self.parrilla
