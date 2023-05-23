@@ -112,3 +112,9 @@ class Tickets(models.Model):
         blank=True,
         null=True,
     )
+
+class Parrilas(models.Model):
+    parrilla = models.CharField(max_length=100)
+    
+    def __str__(self) -> str:
+        return self.parrilla
