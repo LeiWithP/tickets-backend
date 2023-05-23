@@ -10,6 +10,8 @@ class Empresas(models.Model):
     # direccion = models.CharField(max_length=100)
     # telefono = models.CharField(max_length=10)
     # correo = models.EmailField()
+    def __str__(self) -> str:
+        return self.empresa
 
 class Tickets(models.Model):
     empresa = models.ForeignKey(
@@ -27,8 +29,8 @@ class Tickets(models.Model):
         User,
         related_name="levanta", 
         on_delete=models.CASCADE,
-        limit_choices_to=Q(groups__name = 'director general') 
-            | Q(groups__name = 'director operativo')
+        limit_choices_to=Q(groups__name = 'DG') 
+            | Q(groups__name = 'DO')
             | Q(groups__name = 'creativo'),
         null=True,
     )
@@ -63,7 +65,7 @@ class Tickets(models.Model):
         User,
         related_name="encargado", 
         on_delete=models.CASCADE,
-        limit_choices_to=Q(groups__name = 'director operativo')
+        limit_choices_to=Q(groups__name = 'DO')
             | Q(groups__name = 'creativo'),
         null=True,
     )
@@ -71,7 +73,8 @@ class Tickets(models.Model):
         User,
         related_name="apoyo", 
         on_delete=models.CASCADE,
-        limit_choices_to=Q(groups__name = 'creativo'),
+        limit_choices_to=Q(groups__name = 'DO')
+            | Q(groups__name = 'creativo'),
         null=True,
     )
     #redes sociales...
