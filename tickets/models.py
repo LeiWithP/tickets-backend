@@ -113,20 +113,69 @@ class Tickets(models.Model):
         null=True,
     )
 
-class Parrilas(models.Model):
+    def __str__(self) -> str:
+        return self.peticion
+
+class Parrillas(models.Model):
     parrilla = models.CharField(max_length=100)
-    fecha = models.CharField(max_length=100)
-    objetivo = models.CharField(max_length=100)
-    tema = models.CharField(max_length=100)
-    copy = models.CharField(max_length=100)
-    frase = models.CharField(max_length=100)
-    nuevo = models.CharField(max_length=100)
-    republicacion = models.CharField(max_length=100)
-    link = models.CharField(max_length=100)
-    tipos_contenido = models.CharField(max_length=100)
-    plataforma = models.CharField(max_length=100)
-    elaborado = models.CharField(max_length=100)
-    ticket = models.CharField(max_length=100)
-    
+    empresa = models.ForeignKey(
+        Empresas,
+        on_delete=models.CASCADE,
+        null=True,
+    )
+    mes = models.CharField(
+        max_length=2,
+        choices=catalogos.MES,
+        blank=True,
+        null=True,
+    )
+
     def __str__(self) -> str:
         return self.parrilla
+
+class ParrillasEntries(models.Model):
+    parrilla = models.ForeignKey(
+        Parrillas,
+        on_delete=models.CASCADE,
+    )
+    fecha = models.DateTimeField(
+        default=datetime.today,
+    )
+    objetivo = models.CharField(
+        max_length=2,
+        choices=catalogos.OBJETIVO,
+        blank=True,
+        null=True,
+    )
+    tema = models.CharField(max_length=200, blank=True,)
+    copy = models.CharField(max_length=1000, blank=True,)
+    frase = models.CharField(max_length=500, blank=True,)
+    # nuevo = models.BinaryField(default=False)
+    # republicacion = models.BinaryField(default=False)
+    link = models.CharField(max_length=500, blank=True,)
+    tipos_contenido = models.CharField(
+        max_length=2,
+        choices=catalogos.TIPO_CONTENIDO,
+        blank=True,
+        null=True,
+    )
+    plataforma = models.CharField(
+        max_length=2,
+        choices=catalogos.PLATAFORMA,
+        blank=True,
+        null=True,
+    )
+    elaborado = models.ForeignKey(
+        User,
+        related_name="elaborado", 
+        on_delete=models.CASCADE,
+        limit_choices_to=Q(groups__name = 'DO')
+            | Q(groups__name = 'creativo')
+            | Q(groups__name = 'cliente'),
+        null=True,
+    )
+    ticket = models.ForeignKey(
+        Tickets,
+        on_delete=models.CASCADE,
+        null=True,
+    )
