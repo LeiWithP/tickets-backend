@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers, validators
-from .models import Tickets, Empresas
+from .models import Tickets, Empresas, Parrillas, ParrillasEntries
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,3 +61,14 @@ class TicketsSerializer(serializers.ModelSerializer):
         #fields = ('id', 'informacion', 'fecha_solicitud', 'prioridad', 'estado', 'actividad', 'uso', 'frecuencia', 'duracion', 'medio_origen', 'error', 'tipo_error',)
         fields = '__all__'
         read_only_fields = ('fecha_solicitud', 'fecha_entrega',)
+
+class ParrillasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Parrillas
+        fields = '__all__'
+
+class ParrillasEntriesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParrillasEntries
+        fields = '__all__'
+        read_only_fields = ('fecha',)

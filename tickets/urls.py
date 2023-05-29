@@ -9,6 +9,8 @@ router.register('api/users', api.UserViewSet)
 router.register('api/groups', api.GroupViewSet)
 router.register('api/tickets', api.TicketsViewSet, 'tickets')
 router.register('api/empresas', api.EmpresasViewSet, 'empresas')
+router.register('api/parrillas', api.ParrillasViewSet, 'parrillas')
+router.register('api/pentradas', api.ParrilasEntriesViewSet, 'pentradas')
 
 urlpatterns = [
     path('', include(router.urls)),

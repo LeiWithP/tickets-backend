@@ -178,6 +178,7 @@ TIPO_ERROR = [
     ('6', 'Priorización'),
     ('7', 'Registro de Actividades'),
 ]
+
 prioridad_dict = {key: value for key, value in PRIORIDAD}
 estado_dict = {key: value for key, value in ESTADO}
 actividad_dict = {key: value for key, value in ACTIVIDAD}
@@ -188,3 +189,40 @@ dia_dict = {key: value for key, value in DIA}
 medio_origen_dict = {key: value for key, value in MEDIO_ORIGEN}
 error_dict = {key: value for key, value in ERROR}
 tipo_error_dict = {key: value for key, value in TIPO_ERROR}
+
+PLATAFORMA = [
+    ('1', 'Facebook'), ('2', 'Instagram'),
+    ('3', 'Ligado'), ('4', 'YouTube'), ('4', 'TikTok'),
+]
+
+# ESTADO = [
+#     ('1', 'URGENTE'), ('2', 'Importante'),
+#     ('3', 'Normal'), ('4', 'Programado'),
+# ]
+
+OBJETIVO = [
+    ('1', 'Producto'), ('2', 'Promoción'),
+    ('3', 'RRHH'), ('4', 'Relaciones Públicas'),
+    ('5', 'Campaña'), ('6', 'Servicio'),
+]
+
+TIPO_CONTENIDO = [
+    ('1', 'Video'), ('2', 'Carrete'),
+    ('3', 'Reel'), ('4', 'Frase'),
+    ('3', 'Publicación'), ('4', 'Historia'),
+    ('3', 'Publicación/Historia'),
+]
+
+MES = [
+    ('1', 'ENERO'), ('2', 'FEBRERO'),
+    ('3', 'MARZO'), ('4', 'ABRIL'),
+    ('5', 'MAYO'), ('6', 'JUNIO'),
+    ('7', 'JULIO'), ('8', 'AGOSTO'),
+    ('9', 'SEPTIEMBRE'), ('10', 'OCTUBRE'),
+    ('11', 'NOVIMEBRE'), ('12', 'DICIEMBRE'),
+]
+
+plataforma_dict = {key: value for key, value in PLATAFORMA}
+objetivo_dict = {key: value for key, value in OBJETIVO}
+tipo_contenido_dict = {key: value for key, value in TIPO_CONTENIDO}
+mes_dict = {key: value for key, value in MES}
