@@ -65,7 +65,8 @@ class Tickets(models.Model):
         User,
         related_name="encargado", 
         on_delete=models.CASCADE,
-        limit_choices_to=Q(groups__name = 'DO')
+        limit_choices_to=Q(groups__name = 'DG')
+            | Q(groups__name = 'DO')
             | Q(groups__name = 'creativo'),
         null=True,
     )
@@ -74,6 +75,7 @@ class Tickets(models.Model):
         related_name="apoyo", 
         on_delete=models.CASCADE,
         limit_choices_to=Q(groups__name = 'DO')
+            | Q(groups__name = 'DO')
             | Q(groups__name = 'creativo'),
         null=True,
     )
@@ -150,8 +152,7 @@ class ParrillasEntries(models.Model):
     tema = models.CharField(max_length=200, blank=True,)
     copy = models.CharField(max_length=1000, blank=True,)
     frase = models.CharField(max_length=500, blank=True,)
-    # nuevo = models.BinaryField(default=False)
-    # republicacion = models.BinaryField(default=False)
+    
     link = models.CharField(max_length=500, blank=True,)
     tipos_contenido = models.CharField(
         max_length=2,
